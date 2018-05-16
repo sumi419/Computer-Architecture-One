@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const file = process.argv.slice(2);
+// capturing print8 file
 
 if (file.length != 1) {
   console.log('Usage: Node [file location] [file name]');
@@ -8,6 +9,7 @@ if (file.length != 1) {
   process.exit(1);
 }
 
+// file is an array
 const filename = file[0];
 const filedata = fs.readFileSync(filename, 'utf8');
 
