@@ -104,8 +104,8 @@ class CPU {
       case MUL:
         this.alu('MUL', operandA, operandB);
         break;
-      case CALL:
-        break;
+      // case CALL:
+      //   break;
       case LDI:
         this.reg[operandA] = operandB;
         //this.PC += 3;
