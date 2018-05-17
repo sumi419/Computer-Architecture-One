@@ -10,6 +10,8 @@ const LDI = 0b10011001;
 const PRN = 0b01000011;
 const HLT = 0b00000001;
 const MUL = 0b10101010;
+const PUSH = 0b01001101;
+const POP = 0b01001100;
 
 class CPU {
   /**
@@ -22,6 +24,10 @@ class CPU {
 
     // Special-purpose registers
     this.PC = 0; // Program Counter
+
+    // Setting Operations
+    let SP;
+    this.reg[7] = SP; // Stack Pointer
   }
 
   /**
@@ -77,7 +83,7 @@ class CPU {
 
     // !!! IMPLEMENT ME
     // this registers the first instruction computer is fed
-    const IR = this.ram.read(this.PC);
+    const IR = this.ram.read(this.PC, this.SP);
 
     // Debugging output
     //console.log(`${this.PC}: ${IR.toString(2)}`);
@@ -95,6 +101,15 @@ class CPU {
     // value stored in the register would be this.reg
     // !!! IMPLEMENT ME
     switch (IR) {
+      case PUSH:
+        let reg;
+        this.reg[7]--;
+        this.ram.write(this.reg[7], this.reg[operandA]);
+        break;
+      case POP:
+        this.reg[operandA] = this.ram.read(this.reg[7]);
+        this.reg[7]++;
+        break;
       // case ADD:
       //   this.reg[operandA] += this.reg[operandB];
       //   break;
